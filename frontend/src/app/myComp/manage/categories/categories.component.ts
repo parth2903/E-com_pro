@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -6,13 +6,15 @@ import { CategoryService } from '../../../service/category.service';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { Category } from '../../../models/category.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatButtonModule, RouterLink],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatButtonModule, RouterLink,CommonModule],
   templateUrl: './categories.component.html',
-  styleUrl: './categories.component.scss'
+  styleUrl: './categories.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class CategoriesComponent implements OnInit{
   [x: string]: any;
