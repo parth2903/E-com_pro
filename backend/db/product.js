@@ -2,30 +2,36 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    //required: true
   },
   shortDescription: {
     type: String,
-    required: true
+    //required: true
   },
   description : {
     type: String,
-    required: true
+    //required: true
   },
-  purchasePrize :{
+  price :{
     type: Number,
-    required: true
+    //required: true
   },
-  sellingPrize: {
+  discount: {
     type: Number,
-    required: true
+    //required: true
   },
   images: Array(String),
   categoryId:{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category', 
-    required: true
+    // required: true
+  },
+  brandId:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Brand', 
+    // required: true
   }
+
 })
 
 const Product = mongoose.model('products', productSchema);

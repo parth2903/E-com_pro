@@ -1,4 +1,4 @@
 export interface Brand{
-  id?:String,
+  _id?:String,
   name: String
 }

@@ -5,11 +5,12 @@ import { MatInputModule } from '@angular/material/input';
 import { CategoryService } from '../../../service/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-category-form',
   standalone: true,
-  imports: [FormsModule, MatInputModule, MatButtonModule, CommonModule
+  imports: [FormsModule, MatInputModule, MatButtonModule, CommonModule, MatSelectModule
   ],
   templateUrl: './category-form.component.html',
   styleUrl: './category-form.component.scss'

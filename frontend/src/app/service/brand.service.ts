@@ -16,7 +16,7 @@ export class BrandService {
 
   getBrandById(id: String){
     return this.http.get<Brand>(environment.apiUrl+"/brand/"+id);
-  }
+  }  
 
   addBrand(name: String){
     return this.http.post(environment.apiUrl+"/brand", {
