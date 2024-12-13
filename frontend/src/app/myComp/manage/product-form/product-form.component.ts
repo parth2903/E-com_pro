@@ -10,11 +10,12 @@ import { CategoryService } from '../../../service/category.service';
 import { BrandService } from '../../../service/brand.service';
 import { ProductService } from '../../../service/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-product-form',
   standalone: true,
-  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, CommonModule, MatSelectModule],
+  imports: [ReactiveFormsModule, MatInputModule, MatButtonModule, CommonModule, MatSelectModule, MatCheckboxModule],
   templateUrl: './product-form.component.html',
   styleUrl: './product-form.component.scss'
 })
@@ -37,7 +38,9 @@ export class ProductFormComponent implements OnInit{
       discount: [null],
       images: this.fb.array([]),
       categoryId: [null, [Validators.required]],
-      brandId: [null, [Validators.required]],     
+      brandId: [null, [Validators.required]],  
+      isFeatured: [false],
+      inNew: [false]   
     });
     
 
@@ -86,7 +89,7 @@ export class ProductFormComponent implements OnInit{
   updateProduct(){
     let value = this.productForm.value;
     this.productService.updateProduct(this.id,value as any).subscribe((result) => {
-      alert("Product updated")
+      alert("Product updated")  
       this.router.navigateByUrl("/admin/products")
     })
   }

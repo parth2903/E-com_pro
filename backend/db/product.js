@@ -30,6 +30,12 @@ const productSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Brand', 
     // required: true
+  },
+  isFeatured:{
+    type: Boolean
+  },
+  inNew:{
+    type: Boolean
   }
 
 })

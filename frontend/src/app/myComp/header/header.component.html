@@ -1,0 +1,21 @@
+<div class="bg-blue-500 text-white p-2">
+  <div class="space-y-2">
+    <div class="flex justify-between mx-2">
+      <span class="text-2xl font-bold">MyShop</span>
+      <input
+        type="text"
+        placeholder="Search..."
+        class="px-3 w-96 rounded-full border border-gray-300 text-black focus:outline-none focus:ring focus:ring-blue-300"
+      />
+      <a href="#" class=" text-lg hover:bg-blue-600 p-1 px-2 rounded-full">Profile</a>
+      
+    </div>
+    
+    <nav class="flex space-x-4">
+      <a href="#" 
+        class="hover:bg-blue-600 p-1 px-2 rounded-full"
+        *ngFor="let category of categoryList"
+        >{{ category.name }}</a>
+    </nav>
+  </div>     
+</div>

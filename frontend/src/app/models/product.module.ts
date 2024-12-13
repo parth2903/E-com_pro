@@ -6,5 +6,7 @@ export interface Product{
   price : Number;
   discount: Number;
   images: String[];
-  categoryId:String
+  categoryId:String;
+  isFeatured: boolean;
+  inNew: boolean
 }

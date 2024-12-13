@@ -26,4 +26,18 @@ async function getProduct(id) {
   return product.toObject();
 }
 
-module.exports = {addProduct, updateProduct, deleteProduct, getAllProducts, getProduct}
+async function getNewProducts() {
+  let newProduct = await Product.find({
+    inNew: true
+  })
+  return newProduct.map((x) => x.toObject())
+}
+
+async function getFeaturedProducts() {
+  let featuredProduct = await Product.find({
+    isFeatured: true
+  })
+  return featuredProduct.map((x) => x.toObject())
+}
+
+module.exports = {getNewProducts,getFeaturedProducts, addProduct, updateProduct, deleteProduct, getAllProducts, getProduct}
