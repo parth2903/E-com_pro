@@ -6,6 +6,9 @@ import { BrandsComponent } from './myComp/manage/brands/brands.component';
 import { BrandFormComponent } from './myComp/manage/brand-form/brand-form.component';
 import { ProductsComponent } from './myComp/manage/products/products.component';
 import { ProductFormComponent } from './myComp/manage/product-form/product-form.component';
+import { ProductListComponent } from './myComp/product-list/product-list.component';
+import { ProductCardComponent } from './myComp/product-card/product-card.component';
+import { ProductDetailsComponent } from './myComp/product-details/product-details.component';
  
 export const routes: Routes = [
   {
@@ -47,5 +50,13 @@ export const routes: Routes = [
   {
     path:"admin/products/:id",
     component:ProductFormComponent
+  },
+  {
+    path: "products",
+    component: ProductListComponent
+  },
+  {
+    path: "product/:id",
+    component: ProductDetailsComponent
   }
 ];

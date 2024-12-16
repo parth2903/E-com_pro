@@ -1,17 +1,45 @@
 <div class="text-white">
+  <div class="m-6 bg-zinc-800 rounded-lg shadow-md">
+    <swiper-container
+      slides-per-view="4"
+      space-between="12"
+      loop="true"
+      autoplay-delay="3000"
+      [navigation]="true"
+      class="block w-full"
+    >
+      <!-- Swiper Slides -->
+      <swiper-slide
+        *ngFor="let item of bannerImg"
+        class="flex justify-center items-center"
+      >
+        <div
+          class="p-4 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+        >
+          <app-product-card
+            [product]="item"
+            class="w-full"
+          >
+          </app-product-card>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+  </div>
+
   <div class="m-6">
-    <h4 class="text-2xl font-bold mb-4">Featured Products</h4>
+    <h4 class="text-4xl font-bold mb-4 text-center">Featured Products</h4>
     <div class="flex justify-between gap-2">
       <app-product-card
         class="w-3/12"
         *ngFor="let item of featuredProducts" 
-        [product]="item">
+        [product]="item"
+        >
       </app-product-card>
     </div>
   </div>
 
   <div class="m-6">
-    <h4 class="text-2xl font-bold mb-4">Featured Products</h4>
+    <h4 class="text-4xl font-bold mb-4 text-center">New Products</h4>
     <div class="flex justify-between gap-2">
       <app-product-card
         class="w-3/12"
