@@ -3,6 +3,8 @@ import { CategoryService } from '../../service/category.service';
 import { Category } from '../../models/category.model';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
+import { CustomerService } from '../../service/customer.service';
 
 @Component({
   selector: 'app-header',
@@ -13,10 +15,13 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HeaderComponent implements OnInit{
   categoryList : Category[] = []
-  constructor(private categoryService: CategoryService, private router: Router){}
+  constructor(private customerService: CustomerService, 
+    private router: Router,
+    public authService: AuthService
+  ){}
 
   ngOnInit(): void {
-      this.categoryService.getCategories().subscribe(result => {
+      this.customerService.getCategories().subscribe(result => {
         this.categoryList = result;
       })
   }
@@ -30,5 +35,10 @@ export class HeaderComponent implements OnInit{
 
   onCategoryClick(id: String){
     this.router.navigateByUrl("/products?categoryId="+id)
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigateByUrl('/login')
   }
 }

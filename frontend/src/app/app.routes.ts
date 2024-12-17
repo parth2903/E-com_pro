@@ -9,11 +9,15 @@ import { ProductFormComponent } from './myComp/manage/product-form/product-form.
 import { ProductListComponent } from './myComp/product-list/product-list.component';
 import { ProductCardComponent } from './myComp/product-card/product-card.component';
 import { ProductDetailsComponent } from './myComp/product-details/product-details.component';
+import { RegisterComponent } from './myComp/register/register.component';
+import { LoginComponent } from './myComp/login/login.component';
+import { authGaurd } from './core/auth-guard';
  
 export const routes: Routes = [
   {
     path:"",
-    component:HomeComponent
+    component:HomeComponent,
+    canActivate: [authGaurd]
   },
   {
     path:"admin/categories",
@@ -41,7 +45,7 @@ export const routes: Routes = [
   },
   {
     path:"admin/products",
-    component:ProductsComponent
+    component:ProductsComponent,
   },
   {
     path:"admin/products/add",
@@ -53,10 +57,20 @@ export const routes: Routes = [
   },
   {
     path: "products",
-    component: ProductListComponent
+    component: ProductListComponent,
+    canActivate: [authGaurd]
   },
   {
     path: "product/:id",
-    component: ProductDetailsComponent
+    component: ProductDetailsComponent,
+    canActivate: [authGaurd]
+  },
+  {
+    path: "register",
+    component: RegisterComponent
+  },
+  {
+    path: "login",
+    component: LoginComponent
   }
 ];
