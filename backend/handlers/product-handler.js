@@ -40,4 +40,36 @@ async function getFeaturedProducts() {
   return featuredProduct.map((x) => x.toObject())
 }
 
-module.exports = {getNewProducts,getFeaturedProducts, addProduct, updateProduct, deleteProduct, getAllProducts, getProduct}
+async function getProductForListing(searchCat, categoryId, page, pageSize, sortBy, sortOrder, brandId) {
+  if(!sortBy){
+    sortBy = 'price'
+  }
+
+  if(!sortOrder){
+    sortOrder = -1
+  }
+
+  let queryFilter= {};
+  if(searchCat){
+    queryFilter.name = { $regex: searchCat, $options: 'i' };
+  }
+  if(categoryId){
+    queryFilter.categoryId = categoryId
+  }
+
+  if (brandId) {
+    queryFilter.brandId = brandId; 
+  }
+  console.log("queryFilter",queryFilter);
+  
+  const products = await Product.find(queryFilter)
+    .sort({
+      sortBy: sortOrder
+    })
+    .skip((page-1)*pageSize)
+    .limit(pageSize);
+  return products.map((x) => x.toObject())
+  
+}
+
+module.exports = {getNewProducts,getFeaturedProducts, addProduct, updateProduct, deleteProduct, getAllProducts, getProduct, getProductForListing}
