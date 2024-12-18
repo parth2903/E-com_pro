@@ -5,16 +5,18 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { CustomerService } from '../../service/customer.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit{
   categoryList : Category[] = []
+  searchCat !: String;
   constructor(private customerService: CustomerService, 
     private router: Router,
     public authService: AuthService
@@ -27,6 +29,7 @@ export class HeaderComponent implements OnInit{
   }
 
   onSearch(e: any){
+    this.searchCat = ""
     if(e.target.value){
       this.router.navigateByUrl("/products?search="+e.target.value)
     }

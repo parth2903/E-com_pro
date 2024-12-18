@@ -12,6 +12,9 @@ import { ProductDetailsComponent } from './myComp/product-details/product-detail
 import { RegisterComponent } from './myComp/register/register.component';
 import { LoginComponent } from './myComp/login/login.component';
 import { authGaurd } from './core/auth-guard';
+import { AdminDashboardComponent } from './myComp/manage/admin-dashboard/admin-dashboard.component';
+import { adminGaurd } from './core/admin-guard';
+import { CustomerProfileComponent } from './myComp/customer-profile/customer-profile.component';
  
 export const routes: Routes = [
   {
@@ -20,40 +23,54 @@ export const routes: Routes = [
     canActivate: [authGaurd]
   },
   {
+    path: "admin",
+    component : AdminDashboardComponent,
+    canActivate: [adminGaurd]
+  },
+  {
     path:"admin/categories",
-    component:CategoriesComponent
+    component:CategoriesComponent,
+    canActivate: [adminGaurd]
   },
   {
     path:"admin/categories/add",
-    component:CategoryFormComponent
+    component:CategoryFormComponent,
+    canActivate: [adminGaurd]
   },
   {
     path:"admin/categories/:id",
-    component:CategoryFormComponent
+    component:CategoryFormComponent,
+    canActivate: [adminGaurd]
   },
   {
     path:"admin/brands",
-    component:BrandsComponent
+    component:BrandsComponent,
+    canActivate: [adminGaurd]
   },
   {
     path:"admin/brands/add",
-    component:BrandFormComponent
+    component:BrandFormComponent,
+    canActivate: [adminGaurd]
   },
   {
     path:"admin/brands/:id",
-    component:BrandFormComponent
+    component:BrandFormComponent,
+    canActivate: [adminGaurd]
   },
   {
     path:"admin/products",
     component:ProductsComponent,
+    canActivate: [adminGaurd]
   },
   {
     path:"admin/products/add",
-    component:ProductFormComponent
+    component:ProductFormComponent,
+    canActivate: [adminGaurd]
   },
   {
     path:"admin/products/:id",
-    component:ProductFormComponent
+    component:ProductFormComponent,
+    canActivate: [adminGaurd]
   },
   {
     path: "products",
@@ -63,6 +80,11 @@ export const routes: Routes = [
   {
     path: "product/:id",
     component: ProductDetailsComponent,
+    canActivate: [authGaurd]
+  },
+  {
+    path: "profile",
+    component: CustomerProfileComponent,
     canActivate: [authGaurd]
   },
   {

@@ -5,10 +5,56 @@
       <input
         type="text"
         placeholder="Search..."
+        [(ngModel)]="searchCat"
         (keyup.enter)="onSearch($event)"
         class="px-3 w-96 rounded-full border border-gray-300 text-black focus:outline-none focus:ring focus:ring-blue-300"
       />
+
       <div class="mx-3">
+        <!-- Show Username -->
+        <a   
+          *ngIf="authService.isAdminTrue"
+          routerLink="/admin"        
+          class="text-lg hover:bg-blue-600 p-1 px-2 rounded-full cursor-pointer"
+        >
+          {{ authService.userName }}
+        </a>
+
+        <a   
+          *ngIf="!authService.isAdminTrue" 
+          routerLink="/profile"        
+          class="text-lg hover:bg-blue-600 p-1 px-2 rounded-full"
+        >
+          {{ authService.userName }}
+        </a>
+      
+        <!-- Show Logout -->
+        <a 
+          *ngIf="authService.isUserLoggedIn" 
+          (click)="logout()" 
+          class="cursor-pointer text-lg hover:bg-blue-600 p-1 px-2 rounded-full"
+        >
+          Logout
+        </a>
+      
+        <!-- Show Log In and Register -->
+        <ng-container *ngIf="!authService.isUserLoggedIn">
+          <a 
+            routerLink="/login" 
+            class="cursor-pointer text-lg hover:bg-blue-600 p-1 px-2 rounded-full"
+          >
+            Log In
+          </a>
+          <a 
+            routerLink="/register" 
+            class="cursor-pointer text-lg hover:bg-blue-600 p-1 px-2 rounded-full"
+          >
+            Register
+          </a>
+        </ng-container>
+      </div>
+      
+      <!-- <div class="mx-3">
         <a *ngIf="authService.isUserLoggedIn" class=" text-lg hover:bg-blue-600 p-1 px-2 rounded-full">{{ authService.userName}}</a>
         <a (click)="logout()" 
           class="cursor-pointer text-lg hover:bg-blue-600 p-1 px-2 rounded-full" 
@@ -27,7 +73,7 @@
           Register
         </a>
 
-      </div>
+      </div> -->
       
       
     </div>
