@@ -60,14 +60,15 @@ async function getProductForListing(searchCat, categoryId, page, pageSize, sortB
   if (brandId) {
     queryFilter.brandId = brandId; 
   }
-  console.log("queryFilter",queryFilter);
+  console.log("Received Parameters:", { searchCat, categoryId, page, pageSize, sortBy, sortOrder, brandId });
+
   
   const products = await Product.find(queryFilter)
     .sort({
-      sortBy: sortOrder
+      [sortBy]: +sortOrder
     })
-    .skip((page-1)*pageSize)
-    .limit(pageSize);
+    .skip((+page-1)* +pageSize)
+    .limit(+pageSize);
   return products.map((x) => x.toObject())
   
 }
