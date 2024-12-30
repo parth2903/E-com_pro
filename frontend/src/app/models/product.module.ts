@@ -1,12 +1,12 @@
 export interface Product{
-  _id?:String;
-  name: String;
-  shortDescription: String;
-  description: String;
+  _id?:string;
+  name: string;
+  shortDescription: string;
+  description: string;
   price : Number;
   discount: Number;
-  images: String[];
-  categoryId:String;
+  images: string[];
+  categoryId:string;
   isFeatured: boolean;
   inNew: boolean
 }

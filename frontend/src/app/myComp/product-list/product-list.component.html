@@ -64,7 +64,7 @@
       <!-- Next Button -->
       <button 
         class="bg-gray-800 text-white px-4 py-2 rounded-lg shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
-        [disabled]="products.length === 0 || products.length < pageSize" 
+        [disabled]="products.length < pageSize" 
         (click)="changePage(page+1)">
         Next
       </button>

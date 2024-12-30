@@ -1,6 +1,6 @@
 const express = require("express");
-const { getNewProducts, getFeaturedProducts, getProductForListing } = require("../handlers/product-handler");
-const { getCategory } = require("../handlers/category-handler");
+const { getNewProducts, getFeaturedProducts, getProductForListing, getProduct } = require("../handlers/product-handler");
+const { getCategory, getCategoryById } = require("../handlers/category-handler");
 const { getBrands } = require("../handlers/brand-handler");
 const router = express.Router();
 
@@ -17,6 +17,12 @@ router.get("/featured-products", async (req, res) => {
 router.get('/categories', async (req,res) => {
   const categories = await getCategory();
   res.send(categories)
+})
+
+router.get('/categories/:id', async (req,res) => {
+  const id = req.params["id"];
+  const category = await getCategoryById(id);
+  res.send(category)
 })
 
 router.get('/brands', async (req,res) => {
@@ -36,6 +42,12 @@ router.get('/products', async (req,res) => {
     brandId
   );
   res.send(products)
+})
+
+router.get("/product/:id", async (req, res) => {
+  const id = req.params["id"];
+  const product = await getProduct(id);
+  res.send(product)
 })
 
 

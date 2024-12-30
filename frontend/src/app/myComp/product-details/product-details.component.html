@@ -1,1 +1,121 @@
-<p>product-details works!</p>
+<div class="container mx-auto p-6 text-white">
+  <!-- Product Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <!-- Image Gallery -->
+    <div>
+      <div class="aspect-w-4 aspect-h-3 mb-4">
+        <img [src]="mainImage" alt="Product" class="rounded-lg shadow-lg">
+      </div>
+      <div class="grid grid-cols-4 gap-2">
+        <img 
+          *ngFor="let image of product?.images; let i = index"
+          [src]="image" 
+          [alt]="'Thumbnail'+ (i+1)" 
+          (click)="changeImage(image)"
+          class="h-20 w-full object-cover rounded-lg shadow-md cursor-pointer">
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div>
+      <h1 class="text-3xl font-bold text-gray-400">{{ product?.shortDescription }}</h1>
+      <p class="text-lg text-gray-400 mt-2">Category: <span class="font-medium">{{ productCat?.name}}</span></p>
+      <div class="flex gap-x-2">
+        <p class="text-2xl font-bold text-blue-600 mt-3">Rs.{{ sellingPrice }}</p>
+        <p class="text-xl font-bold text-blue-300 mt-4">
+          <s>{{ product?.price }}</s>
+        </p>
+        <p class="text-xl font-bold text-green-600 mt-4">{{ product?.discount }}% off</p>
+      </div>
+
+
+      <!-- Product Description -->
+      <div class="mt-6">
+        <h2 class="text-2xl font-semibold text-gray-400">Description</h2>
+        <p class="mt-2 leading-relaxed">
+          {{ product?.description }}
+        </p>
+      </div>
+
+      <!-- Add to Cart -->
+      <div class="mt-6">
+        <button class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Similar products -->
+  <div class="m-6">
+    <h4 class="text-4xl font-bold mb-4 text-center">Similar Products</h4>
+    <div class="flex justify-between gap-2">
+      <app-product-card
+        class="w-3/12"
+        *ngFor="let item of similarProducts" 
+        [product]="item">
+      </app-product-card>
+    </div>
+  </div>
+
+  <!-- Product Reviews -->
+  <div class="mt-12">
+    <h2 class="text-2xl font-bold text-gray-400">Reviews</h2>
+    <div class="mt-4">
+      <!-- Review 1 -->
+      <div class="border-b border-gray-300 pb-4 mb-4">
+        <div class="flex items-center mb-2">
+          <img src="https://via.placeholder.com/50" alt="User" class="h-10 w-10 rounded-full object-cover mr-4">
+          <div>
+            <p class="font-semibold">John Doe</p>
+            <p class="text-sm text-gray-400">2 days ago</p>
+          </div>
+        </div>
+        <p>
+          Great product! The quality is amazing, and it works exactly as described. Highly recommend!
+        </p>
+      </div>
+      
+      <!-- Review 2 -->
+      <div class="border-b border-gray-300 pb-4 mb-4">
+        <div class="flex items-center mb-2">
+          <img src="https://via.placeholder.com/50" alt="User" class="h-10 w-10 rounded-full object-cover mr-4">
+          <div>
+            <p class="font-semibold">John Doe</p>
+            <p class="text-sm text-gray-400">2 days ago</p>
+          </div>
+        </div>
+        <p>
+          Great product! The quality is amazing, and it works exactly as described. Highly recommend!
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <h2 class="text-2xl font-bold text-gray-400">Write a Review</h2>
+      <form class="mt-4 space-y-4">
+    
+        <!-- Review Textarea -->
+        <div>
+          <textarea 
+            id="comment" 
+            rows="4" 
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Write your review here"
+            required
+          ></textarea>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="flex justify-end">
+          <button 
+            type="submit"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition">
+            Submit Review
+          </button>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+</div>
