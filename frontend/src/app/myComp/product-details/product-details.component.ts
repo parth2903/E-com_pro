@@ -5,11 +5,14 @@ import { Product } from '../../models/product.module';
 import { Category } from '../../models/category.model';
 import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../product-card/product-card.component';
+import {MatIconModule} from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button';
+import { WishlistService } from '../../service/wishlist.service';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule,ProductCardComponent],
+  imports: [CommonModule,ProductCardComponent, MatButtonModule, MatIconModule],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })
@@ -20,7 +23,9 @@ export class ProductDetailsComponent implements OnInit{
   similarProducts:Product[] = []
   
   route = inject(ActivatedRoute)
-  constructor(private customerService: CustomerService){}
+  constructor(private customerService: CustomerService,
+    private wishlistService: WishlistService
+  ){}
 
   ngOnInit(): void {
     this.route.params.subscribe((x: any) => {
@@ -55,5 +60,26 @@ export class ProductDetailsComponent implements OnInit{
     const price = Number(this.product?.price) || 0; 
     const discount = Number(this.product?.discount) || 0; 
     return price - (price * discount) / 100;
+  }
+
+  addToWishlist(product: any){
+    if(this.isInWishlist(product)){
+      this.wishlistService.removeInWishlists(product._id!).subscribe(result => {
+        this.wishlistService.init()
+      });
+    }else{
+      this.wishlistService.addInWishlists(product._id!).subscribe(result => {
+        this.wishlistService.init()
+      })
+    }
+  }
+
+  isInWishlist(product: Product){
+    let productExist = this.wishlistService.wishlists.find(x => x._id == product._id)
+    if(productExist){
+      return true
+    }else{
+      return false
+    }
   }
 }

@@ -1,14 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Product } from '../../models/product.module';
 import { RouterLink } from '@angular/router';
+import {MatIconModule} from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink, MatButtonModule, MatIconModule],
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.scss'
+  styleUrl: './product-card.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class ProductCardComponent {
   @Input() product!: Product;

@@ -15,6 +15,7 @@ import { authGaurd } from './core/auth-guard';
 import { AdminDashboardComponent } from './myComp/manage/admin-dashboard/admin-dashboard.component';
 import { adminGaurd } from './core/admin-guard';
 import { CustomerProfileComponent } from './myComp/customer-profile/customer-profile.component';
+import { WishlistsComponent } from './myComp/wishlists/wishlists.component';
  
 export const routes: Routes = [
   {
@@ -85,6 +86,11 @@ export const routes: Routes = [
   {
     path: "profile",
     component: CustomerProfileComponent,
+    canActivate: [authGaurd]
+  },
+  {
+    path: "wishlists",
+    component: WishlistsComponent,
     canActivate: [authGaurd]
   },
   {

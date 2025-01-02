@@ -10,7 +10,7 @@
         class="px-3 w-96 rounded-full border border-gray-300 text-black focus:outline-none focus:ring focus:ring-blue-300"
       />
 
-      <div class="mx-3">
+      <div class="flex gap-1 items-center">
         <!-- Show Username -->
         <a   
           *ngIf="authService.isAdminTrue"
@@ -26,6 +26,22 @@
           class="text-lg hover:bg-blue-600 p-1 px-2 rounded-full"
         >
           {{ authService.userName }}
+        </a>
+
+        <a 
+          *ngIf="authService.isUserLoggedIn" 
+          routerLink="/wishlists"
+          class="hover:bg-blue-600 p-1 px-2 rounded-full"
+        >
+          <mat-icon>favorite</mat-icon> 
+        </a>
+
+        <a 
+          *ngIf="authService.isUserLoggedIn" 
+          routerLink="/wishlists"
+          class="hover:bg-blue-600 p-1 px-2 rounded-full "
+        >
+            <mat-icon>add_shopping_cart</mat-icon> 
         </a>
       
         <!-- Show Logout -->
