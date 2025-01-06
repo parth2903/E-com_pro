@@ -16,6 +16,7 @@ import { AdminDashboardComponent } from './myComp/manage/admin-dashboard/admin-d
 import { adminGaurd } from './core/admin-guard';
 import { CustomerProfileComponent } from './myComp/customer-profile/customer-profile.component';
 import { WishlistsComponent } from './myComp/wishlists/wishlists.component';
+import { ShoppingCartComponent } from './myComp/shopping-cart/shopping-cart.component';
  
 export const routes: Routes = [
   {
@@ -91,6 +92,11 @@ export const routes: Routes = [
   {
     path: "wishlists",
     component: WishlistsComponent,
+    canActivate: [authGaurd]
+  },
+  {
+    path: "cart",
+    component: ShoppingCartComponent,
     canActivate: [authGaurd]
   },
   {
