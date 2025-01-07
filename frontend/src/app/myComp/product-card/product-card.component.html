@@ -32,8 +32,9 @@
       
       <button
         class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 focus:outline-none"
+        (click)="addToCart(product)"
       >
-        Add to Cart
+      {{ product? (isInCart(product._id) ? 'Remove from Cart' : 'Add to Cart') : 'Loading...'}}
       </button>
       
     </div>

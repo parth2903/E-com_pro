@@ -44,8 +44,10 @@
         >
           {{ product ? (isInWishlist(product) ? 'Remove from Wishlist' : 'Add to Wishlist') : 'Loading...' }}
         </button>
-        <button class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition">
-          Add to Cart
+        <button class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition"
+          (click)="addToCart(product)"
+        >
+          {{ product? (isInCart(product._id) ? 'Remove from Cart' : 'Add to Cart') : 'Loading...'}}
         </button>
       </div>
     </div>

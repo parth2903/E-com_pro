@@ -8,6 +8,7 @@ import { ProductCardComponent } from '../product-card/product-card.component';
 import {MatIconModule} from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button';
 import { WishlistService } from '../../service/wishlist.service';
+import { CartService } from '../../service/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -24,7 +25,8 @@ export class ProductDetailsComponent implements OnInit{
   
   route = inject(ActivatedRoute)
   constructor(private customerService: CustomerService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private cartService : CartService
   ){}
 
   ngOnInit(): void {
@@ -77,6 +79,26 @@ export class ProductDetailsComponent implements OnInit{
   isInWishlist(product: Product){
     let productExist = this.wishlistService.wishlists.find(x => x._id == product._id)
     if(productExist){
+      return true
+    }else{
+      return false
+    }
+  }
+
+  addToCart(product: any){
+    if(!this.isInCart(product._id)){
+      this.cartService.addToCart(product._id, 1).subscribe(()=>{
+        this.cartService.init()
+      });
+    }else{
+      this.cartService.removeFromCart(product._id).subscribe(()=>{
+        this.cartService.init()
+      });
+    }
+  }
+
+  isInCart(productId: string | undefined){
+    if(this.cartService.cart.find(x=> x.product._id == productId)){
       return true
     }else{
       return false

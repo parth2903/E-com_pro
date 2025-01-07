@@ -3,9 +3,13 @@ const Cart = require("../db/cart");
 async function addToCart(userId,productId,quantity) {
   let product = await Cart.findOne({ userId:userId, productId: productId});
   if(product){
-    await Cart.findByIdAndUpdate(product._id , {
-      quantity: product.quantity+ quantity
-    })
+    if(product.quantity + quantity <= 0){
+      await removeFromCart(userId,productId)
+    }else{
+      await Cart.findByIdAndUpdate(product._id , {
+        quantity: product.quantity+ quantity
+      })
+    }
   }else{
     product = new Cart({
       userId,

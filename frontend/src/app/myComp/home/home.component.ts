@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { RouterLink } from '@angular/router';
 import { WishlistService } from '../../service/wishlist.service';
+import { CartService } from '../../service/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit{
   featuredProducts: Product[]=[];
   bannerImg: Product[]=[];
   constructor(private customerService: CustomerService,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private cartService : CartService
   ){}
 
   ngOnInit(): void {
@@ -34,6 +36,7 @@ export class HomeComponent implements OnInit{
     })
 
     this.wishlistService.init()
+    this.cartService.init()
   }
 
 }
