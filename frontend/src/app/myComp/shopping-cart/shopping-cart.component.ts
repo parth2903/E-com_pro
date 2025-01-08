@@ -1,21 +1,44 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { CartService } from '../../service/cart.service';
 import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product.module';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
+import { OrderService } from '../../service/order.service';
+import { Order } from '../../models/order.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatRadioModule, FormsModule],
   templateUrl: './shopping-cart.component.html',
-  styleUrl: './shopping-cart.component.scss'
+  styleUrl: './shopping-cart.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class ShoppingCartComponent implements OnInit{
   cartService = inject(CartService)
+  orderService = inject(OrderService)
+  router=inject(Router)
+  orderStep: number = 0
+  paymentType = 'cash'
+
+  addressForm!: FormGroup;
+  constructor(private fb: FormBuilder){}
+
   ngOnInit(): void {
-      this.cartService.init()
+    this.addressForm = this.fb.group({
+      fullName: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      addressLine1: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      postalCode: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
+    });
+    this.cartService.init()
   }
-  get cartItems(){
+
+    get cartItems(){
     return this.cartService.cart
   }
 
@@ -44,5 +67,35 @@ export class ShoppingCartComponent implements OnInit{
       amount+= (this.sellingPrice(ele.product)*ele.quantity)
     }
     return amount
+  }
+
+  checkout(){
+    this.orderStep = 1;
+  }
+
+  addAddress() {
+    if (this.addressForm.valid) {
+      this.orderStep = 2;
+      console.log('Address Submitted:', this.addressForm.value);
+      // Handle the form submission logic here
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+
+  completeOrder(){
+    let order : Order = {
+      items: this.cartItems,
+      paymentType: this.paymentType,
+      address :this.addressForm.value,
+      date: new Date(),
+    }
+    this.orderService.addOrder(order).subscribe((result) => {
+      alert('Your order is completed')
+      this.cartService.init()
+      this.orderStep = 0
+      this.router.navigateByUrl("/orders")
+    })
+    console.log(order)
   }
 }

@@ -30,4 +30,10 @@ async function getCart(userId) {
     return {quantity: x.quantity, product : x.productId}
   })
 }
-module.exports = {addToCart,removeFromCart,getCart}
+
+async function clearCart(userId) {
+  await Cart.deleteMany({
+    userId:userId
+  })
+}
+module.exports = {addToCart,removeFromCart,getCart, clearCart}

@@ -3,7 +3,8 @@ const { getNewProducts, getFeaturedProducts, getProductForListing, getProduct } 
 const { getCategory, getCategoryById } = require("../handlers/category-handler");
 const { getBrands } = require("../handlers/brand-handler");
 const { getWishlist, addToWishlist, removeFromWishlist } = require("../handlers/wishlist-handler");
-const { getCart, addToCart, removeFromCart } = require("../handlers/shopping-cart-handler");
+const { getCart, addToCart, removeFromCart, clearCart } = require("../handlers/shopping-cart-handler");
+const { addOrder, getCustomerOrders } = require("../handlers/order-handler");
 const router = express.Router();
 
 router.get("/new-products", async (req, res) => {
@@ -93,5 +94,20 @@ router.delete("/carts/:id", async (req, res) => {
   res.send({message: "ok"})
 })
 
+router.post('/order', async (req,res) => {
+  const userId = req.user.id;
+  const order = req.body;
+  await addOrder(userId, order);
+  await clearCart(userId);
+  return res.send({
+    message:"Order Created"
+  })
+})
+
+router.get('/orders', async (req,res) => {
+  const userId = req.user.id;
+  const orders = await getCustomerOrders(userId)
+  return res.send(orders)
+})
 
 module.exports = router;

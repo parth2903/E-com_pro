@@ -17,6 +17,7 @@ import { adminGaurd } from './core/admin-guard';
 import { CustomerProfileComponent } from './myComp/customer-profile/customer-profile.component';
 import { WishlistsComponent } from './myComp/wishlists/wishlists.component';
 import { ShoppingCartComponent } from './myComp/shopping-cart/shopping-cart.component';
+import { MyOrderComponent } from './myComp/my-order/my-order.component';
  
 export const routes: Routes = [
   {
@@ -97,6 +98,11 @@ export const routes: Routes = [
   {
     path: "cart",
     component: ShoppingCartComponent,
+    canActivate: [authGaurd]
+  },
+  {
+    path: "orders",
+    component: MyOrderComponent,
     canActivate: [authGaurd]
   },
   {

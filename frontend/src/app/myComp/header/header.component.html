@@ -43,6 +43,14 @@
         >
             <mat-icon>add_shopping_cart</mat-icon> 
         </a>
+
+        <a 
+          *ngIf="authService.isUserLoggedIn" 
+          routerLink="/orders"
+          class="hover:bg-blue-600 p-1 px-2 rounded-full"
+        >
+          My Orders 
+        </a>
       
         <!-- Show Logout -->
         <a 
